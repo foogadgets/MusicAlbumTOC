@@ -1,0 +1,38 @@
+###########################################
+# Syntax Coloring Map For MusicAlbumTOC
+# https://github.com/foogadgets/MusicAlbumTOC.git
+# (C) foogadgets, 2021, CC-BY-SA 4.0
+# https://creativecommons.org/licenses/by-sa/4.0/
+###########################################
+
+###########################################
+# Datatypes (KEYWORD1)
+###########################################
+
+MusicAlbumTOC	KEYWORD1
+
+###########################################
+# Methods and Functions (KEYWORD2)
+###########################################
+    void    setTrackDuration(const uint8_t trackNo, const uint32_t duration);
+    uint32_t getTrackDuration(const uint8_t trackNo);
+
+setAlbumName	KEYWORD2
+addTrack	KEYWORD2
+setTrackName	KEYWORD2
+setTrackDuration	KEYWORD2
+getTrackDuration	KEYWORD2
+getNoTracks	KEYWORD2
+getAlbumName	KEYWORD2
+getTrackName	KEYWORD2
+clearToc	KEYWORD2
+
+###########################################
+# Constants (LITERAL1)
+###########################################
+
+MAXALBUMLEN	LITERAL1
+MAXTRACKNO	LITERAL1
+MAXTRACKLEN	LITERAL1
+
+###########################################
