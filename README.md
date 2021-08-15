@@ -1,4 +1,5 @@
 # MusicAlbumTOC
+[![License](https://img.shields.io/badge/License-GPLv3-blue.svg)](./LICENSE)
 
 Arduino MusicAlbumTOC library to make album handling easier.
 
