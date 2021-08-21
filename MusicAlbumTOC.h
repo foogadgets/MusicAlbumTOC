@@ -5,7 +5,6 @@
 
 
 #define MAXTRACKNO  100
-#define TMPBUFLEN   255
 
 class MusicAlbumTOC
 {
@@ -29,7 +28,6 @@ class MusicAlbumTOC
     char   *_trackName[MAXTRACKNO];
     uint32_t *_trackDuration_ms[MAXTRACKNO];
     uint8_t _numberOfTracks;
-    char    _tmpBuf[255];
 };
 
 #endif // MUSICALBUMTOC_H

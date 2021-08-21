@@ -5,13 +5,11 @@
 
 MusicAlbumTOC::MusicAlbumTOC(void)
 {
-  this->_numberOfTracks = 0;
   clearToc();
 }
 
 MusicAlbumTOC::MusicAlbumTOC(const char* albumName)
 {
-  this->_numberOfTracks = 0;
   clearToc();
 
   this->_albumName = (char*)calloc(1, (1+strlen(albumName))*sizeof(char));
@@ -35,6 +33,9 @@ MusicAlbumTOC::setAlbumName(const char *albumName)
   return true;
 }
 
+   /* track number start from 1 ... 
+   duration is stored in milliseconds
+   */
 bool
 MusicAlbumTOC::setTrackDuration(const uint8_t trackNo, const uint32_t duration)
 {
@@ -48,6 +49,9 @@ MusicAlbumTOC::setTrackDuration(const uint8_t trackNo, const uint32_t duration)
   return true;
 }
 
+   /* track number start from 1 ... 
+   Return value in milliseconds
+   */
 uint32_t
 MusicAlbumTOC::getTrackDuration(const uint8_t trackNo)
 {
@@ -107,8 +111,6 @@ MusicAlbumTOC::getTrackName(const uint8_t trackNo)
 
 void
 MusicAlbumTOC::clearToc(void) {
-  memset(this->_tmpBuf, 0, TMPBUFLEN*sizeof(char));
-
   if (this->_numberOfTracks > 0) {
     free(this->_albumName);
     this->_albumName = NULL;
