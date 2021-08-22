@@ -28,9 +28,9 @@ void setup() {
 }
 
 void loop() {
-  uint8_t noOfTracks = minidiscTOC.getNoTracks();
-  for (uint8_t i=0; i<noOfTracks) {
+  for (uint8_t i=0; i < minidiscTOC.getNoTracks(); i++) {
     Serial.println(minidiscTOC.getTrackName(i+1);
   }
+  for(;;);
 }
 ```
