@@ -17,15 +17,15 @@ MusicAlbumTOC	KEYWORD1
     void    setTrackDuration(const uint8_t trackNo, const uint32_t duration);
     uint32_t getTrackDuration(const uint8_t trackNo);
 
-setAlbumName	KEYWORD2
 addTrack	KEYWORD2
+setAlbumName	KEYWORD2
 setTrackName	KEYWORD2
 setTrackDuration	KEYWORD2
 getTrackDuration	KEYWORD2
 getNoTracks	KEYWORD2
 getAlbumName	KEYWORD2
 getTrackName	KEYWORD2
-clearToc	KEYWORD2
+clearTOC	KEYWORD2
 
 ###########################################
 # Constants (LITERAL1)

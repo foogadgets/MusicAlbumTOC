@@ -12,7 +12,7 @@ MusicAlbumTOC::MusicAlbumTOC(void)
 MusicAlbumTOC::MusicAlbumTOC(const char* albumName)
 {
   _numberOfTracks = 0;
-  clearToc();
+  clearTOC();
 
   this->_albumName = (char*)calloc((strlen(albumName)+1), sizeof(char));
   strncpy(this->_albumName, albumName, strlen(albumName));
@@ -20,7 +20,7 @@ MusicAlbumTOC::MusicAlbumTOC(const char* albumName)
 
 MusicAlbumTOC::~MusicAlbumTOC(void)
 {
-  clearToc();
+  clearTOC();
 }
 
 
@@ -70,12 +70,15 @@ MusicAlbumTOC::addTrack(const char *trackName)
 {
   if (this->_numberOfTracks >= MAXTRACKNO) return false;
 
-  if(this->_trackName[this->_numberOfTracks] == NULL) {
-    this->_trackName[this->_numberOfTracks] = (char*)calloc((strlen(trackName)+1), sizeof(char));
-    if (this->_trackName[this->_numberOfTracks] == NULL) return false;
+  if (this->_trackName[this->_numberOfTracks] != NULL) {
+    free(this->_trackName[this->_numberOfTracks]);
   }
 
+  this->_trackName[this->_numberOfTracks] = (char*)calloc((strlen(trackName)+1), sizeof(char));
+  if (this->_trackName[this->_numberOfTracks] == NULL) return false;
+
   strncpy(this->_trackName[this->_numberOfTracks], trackName, strlen(trackName));
+
   this->_numberOfTracks++;
 
   return true;
@@ -86,7 +89,9 @@ MusicAlbumTOC::setTrackName(const uint8_t trackNo, const char *trackName)
 {
   if (trackNo == 0 || trackNo > this->_numberOfTracks) return false;
 
-  free(this->_trackName[trackNo-1]);
+  if (this->_trackName[trackNo-1] != NULL) {
+    free(this->_trackName[trackNo-1]);
+  }
 
   this->_trackName[trackNo-1] = (char*)calloc((1+strlen(trackName)), sizeof(char));
   if (this->_trackName[trackNo-1] == NULL) return false;
@@ -117,7 +122,7 @@ MusicAlbumTOC::getTrackName(const uint8_t trackNo)
 }
 
 void
-MusicAlbumTOC::clearToc(void) {
+MusicAlbumTOC::clearTOC(void) {
   if(this->_albumName != NULL) {
     free(this->_albumName);
     this->_albumName = NULL;
