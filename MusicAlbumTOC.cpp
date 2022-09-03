@@ -31,7 +31,7 @@ MusicAlbumTOC::setAlbumName(const char *albumName)
   strncpy(this->_albumName, albumName, strlen(albumName));
 
   this->_usedBlocks += (strlen(albumName)+6)/7;
-  if (this->_usedBlocks > 255) { return 2; }
+  if (this->_usedBlocks > MAXBLOCKS) { return 2; }
 
   return 0;
 }
@@ -42,7 +42,7 @@ MusicAlbumTOC::setAlbumName(const char *albumName)
 uint8_t
 MusicAlbumTOC::setTrackDuration(const uint8_t trackNo, const uint32_t duration)
 {
-  if (trackNo == 0 || trackNo > this->_numberOfTracks) return 1;
+  if (trackNo == 0 || trackNo > this->_numberOfTracks) { return 1; }
   
   if(this->_trackDuration_ms[trackNo-1] == NULL) {
     this->_trackDuration_ms[trackNo-1] = (uint32_t*)malloc(sizeof(uint32_t));
@@ -60,7 +60,7 @@ MusicAlbumTOC::setTrackDuration(const uint8_t trackNo, const uint32_t duration)
 uint32_t
 MusicAlbumTOC::getTrackDuration(const uint8_t trackNo)
 {
-  if (trackNo == 0 || trackNo > this->_numberOfTracks) return 0UL;
+  if (trackNo == 0 || trackNo > this->_numberOfTracks) { return 0UL; }
   return *(this->_trackDuration_ms[trackNo-1]);
 }
 
@@ -68,16 +68,16 @@ MusicAlbumTOC::getTrackDuration(const uint8_t trackNo)
 uint8_t
 MusicAlbumTOC::addTrack(const char *trackName)
 {
-  if (this->_numberOfTracks >= MAXTRACKNO) return 1;
+  if (this->_numberOfTracks >= MAXTRACKNO) { return 1; }
 
   if (this->_trackName[this->_numberOfTracks] != NULL) {
     free(this->_trackName[this->_numberOfTracks]);
   }
 
-  if ((this->_usedBlocks+(strlen(trackName)+6)/7) > 255) { return 2; }
+  if ((this->_usedBlocks+(strlen(trackName)+6)/7) > MAXBLOCKS) { return 2; }
 
   this->_trackName[this->_numberOfTracks] = (char*)calloc((strlen(trackName)+1), sizeof(char));
-  if (this->_trackName[this->_numberOfTracks] == NULL) return 3;
+  if (this->_trackName[this->_numberOfTracks] == NULL) { return 3; }
 
   strncpy(this->_trackName[this->_numberOfTracks], trackName, strlen(trackName));
 
@@ -90,16 +90,18 @@ MusicAlbumTOC::addTrack(const char *trackName)
 uint8_t
 MusicAlbumTOC::setTrackName(const uint8_t trackNo, const char *trackName)
 {
-  if (trackNo == 0 || trackNo > this->_numberOfTracks) return 1;
+  if (trackNo == 0 || trackNo > this->_numberOfTracks) { return 1; }
 
   if (this->_trackName[trackNo-1] != NULL) {
-    if ((this->_usedBlocks+(strlen(trackName)+6)/7) > 255) { return 2; }
+    uint16_t tmpBlocks = _usedBlocks - (strlen(this->_trackName[trackNo-1])+6)/7;
+    if ((tmpBlocks + (strlen(trackName)+6)/7) > MAXBLOCKS) { return 2; }
+
     this->_usedBlocks -= (strlen(this->_trackName[trackNo-1])+6)/7;
     free(this->_trackName[trackNo-1]);
   }
 
   this->_trackName[trackNo-1] = (char*)calloc((1+strlen(trackName)), sizeof(char));
-  if (this->_trackName[trackNo-1] == NULL) return 3;
+  if (this->_trackName[trackNo-1] == NULL) { return 3; }
 
   strncpy(this->_trackName[trackNo-1], trackName, strlen(trackName));
 
@@ -123,7 +125,7 @@ MusicAlbumTOC::getAlbumName(void)
 char*
 MusicAlbumTOC::getTrackName(const uint8_t trackNo)
 {
-  if (trackNo == 0 || trackNo > this->_numberOfTracks) return NULL;
+  if (trackNo == 0 || trackNo > this->_numberOfTracks) { return NULL; }
 
   return this->_trackName[(trackNo - 1)];
 }
@@ -145,4 +147,3 @@ MusicAlbumTOC::clearTOC(void) {
   this->_numberOfTracks = 0;
   this->_usedBlocks = 0;
 }
-
