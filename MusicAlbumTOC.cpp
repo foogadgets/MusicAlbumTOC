@@ -7,13 +7,6 @@ MusicAlbumTOC::MusicAlbumTOC(void)
 {
 }
 
-MusicAlbumTOC::MusicAlbumTOC(const char* albumName)
-{
-  this->_albumName = (char*)calloc((strlen(albumName)+1), sizeof(char));
-  strncpy(this->_albumName, albumName, strlen(albumName));
-
-  this->_usedBlocks = (strlen(albumName)+6)/7;
-}
 
 MusicAlbumTOC::~MusicAlbumTOC(void)
 {
@@ -24,6 +17,8 @@ MusicAlbumTOC::~MusicAlbumTOC(void)
 uint8_t
 MusicAlbumTOC::setAlbumName(const char *albumName)
 {
+  if(albumName == NULL) { return 4; }	// album a Nullstring is not allowed
+
   if(this->_albumName != NULL) { this->_usedBlocks -= (strlen(this->_albumName)+6)/7; free(this->_albumName); }
 
   this->_albumName = (char*)calloc((strlen(albumName)+1), sizeof(char));

@@ -11,7 +11,6 @@ class MusicAlbumTOC
 {
   public:
     MusicAlbumTOC(void);
-    MusicAlbumTOC(const char* albumName);
     ~MusicAlbumTOC(void);
 
     uint8_t addTrack(const char *trackName);
