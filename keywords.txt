@@ -10,29 +10,26 @@
 ###########################################
 
 MusicAlbumTOC	KEYWORD1
+MusicTrack		KEYWORD1
 
 ###########################################
 # Methods and Functions (KEYWORD2)
 ###########################################
-    void    setTrackDuration(const uint8_t trackNo, const uint32_t duration);
-    uint32_t getTrackDuration(const uint8_t trackNo);
-
+clearToc	KEYWORD2
+size		KEYWORD2
+getBlocks	KEYWORD2
+nameAlbum	KEYWORD2
 addTrack	KEYWORD2
-setAlbumName	KEYWORD2
-setTrackName	KEYWORD2
-setTrackDuration	KEYWORD2
 getTrackDuration	KEYWORD2
-getNoTracks	KEYWORD2
-getAlbumName	KEYWORD2
+renameTrack	KEYWORD2
+getTitle	KEYWORD2
 getTrackName	KEYWORD2
-clearTOC	KEYWORD2
+getTracks	KEYWORD2
+getName		KEYWORD2
+getDuration	KEYWORD2
 
 ###########################################
 # Constants (LITERAL1)
 ###########################################
-
-MAXALBUMLEN	LITERAL1
-MAXTRACKNO	LITERAL1
-MAXTRACKLEN	LITERAL1
 
 ###########################################

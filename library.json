@@ -1,13 +1,13 @@
 {
   "name": "MusicAlbumTOC",
-  "keywords": "Music, Album, TOC, Minidisc, LP",
+  "keywords": "Music, Album, TOC, MiniDisc",
   "description": "Arduino ESP8266 Music album toc class",
   "repository":
   {
     "type": "git",
     "url": "https://github.com/foogadgets/MusicAlbumTOC.git"
   },
-  "version": "0.1.0",
+  "version": "0.2.0",
   "authors": {
     "name": "foogadgets",
     "url": "https://github.com/foogadgets"

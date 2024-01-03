@@ -1,36 +1,52 @@
 # MusicAlbumTOC
-[![License](https://img.shields.io/badge/License-GPLv3-blue.svg)](./LICENSE)
 
-Arduino MusicAlbumTOC library to make album handling easier.
+**Arduino MusicAlbumTOC library **
+
+
+(C) foogadgets, 2021, CC-BY-SA 4.0
+https://creativecommons.org/licenses/by-sa/4.0/
+
+-------------------------------------------------------------------------------------------------------------------
 
 # Installation
-```
-cd Arduino/libraries/
-git clone https://github.com/foogadgets/MusicAlbumTOC.git
-```
+Create a new folder called "MusicAlbumTOC" under the folder named "libraries" in your Arduino sketchbook folder.
+Create the folder "libraries" in case it does not exist yet. Place all the files in the "MusicAlbumTOC" folder.
 
-# Usage example
+# Usage
+To use the library in your own sketch, select it from *Sketch > Import Library*.
+
+# Example
 
 Simplest example of using this library:
 
 ```c++
-#include "MusicAlbumTOC.h"
+#include <MusicAlbumTOC.h>
+
 MusicAlbumTOC minidiscTOC;
-MusicAlbumTOC anotherMinidiscTOC("Deep Purple-Machine Head");
 
 void setup() {
-  minidiscTOC.setAlbumName("Imagine Dragons-Evolve");
-  minidiscTOC.addTrack("Next to me");
-  minidiscTOC.addTrack("I Don't know why");
-  minidiscTOC.addTrack("Whatever it takes");
-  minidiscTOC.addTrack("Walking with the wire");
-  minidiscTOC.setTrackName(4, "Beliver");
+  minidiscTOC.nameAlbum("Imagine Dragons - Evolve");
+  minidiscTOC.addTrack("Next To Me", 34523);
+  minidiscTOC.addTrack("I Don't Know Why", 64738);
+  minidiscTOC.addTrack("Whatever It Takes", 78994);
+  minidiscTOC.addTrack("Never gonna give you up", 2666475);
+  minidiscTOC.addTrack("Walking with the wire", 2666475);
+
+  minidiscTOC.renameTrack("Beliver", 4847738, 4);
+
+  Serial.println(minidiscTOC.getTitle());
+
+  for (const MusicTrack& track : minidiscTOC.getTracks()) {
+    Serial.print(track.getName());
+    Serial.print(", duration: ");
+    Serial.print(track.getDuration());
+    Serial.println("ms");
+  }
 }
 
 void loop() {
-  for (uint8_t i=0; i < minidiscTOC.getNoTracks(); i++) {
-    Serial.println(minidiscTOC.getTrackName(i+1);
-  }
-  for(;;);
 }
 ```
+
+  Feel free to share this source code, but include explicit mention to the author.
+  Licensed under creative commons - see http://creativecommons.org/licenses/by-sa/4.0/
